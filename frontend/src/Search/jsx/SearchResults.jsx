@@ -108,7 +108,7 @@ function SearchResults() {
                     fontSize: '1rem'
                 }}
             >
-                100 Results
+                {courses.length} Results
             </Typography>
         </Box>
 
