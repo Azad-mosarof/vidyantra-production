@@ -1,0 +1,12 @@
+runtime: nodejs16
+
+# Service name is optional and is used to manage different services within the same project.
+# service: your-service-name
+
+env_variables:
+  NODE_ENV: production
+
+handlers:
+  - url: /.*
+    script: auto
+    secure: always
