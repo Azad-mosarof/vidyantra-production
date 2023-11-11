@@ -1,4 +1,4 @@
-runtime: nodejs16
+runtime: nodejs20.9.0
 
 # Service name is optional and is used to manage different services within the same project.
 # service: your-service-name
