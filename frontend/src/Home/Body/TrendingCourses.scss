@@ -1,0 +1,62 @@
+@import '../../css-config/mixins.scss';
+
+.trending--courses{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+    gap: 2rem;
+    overflow-y: auto;
+
+    .trending--title{
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: -1rem;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .trending--subtitle{
+        font-size: 1.1rem;
+        font-weight: 400;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .trending--courses--selector--tabs{
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        .trending--courses--selector--tab{
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: Arial, Helvetica, sans-serif;
+            cursor: pointer;
+            &:hover{
+                opacity: 0.6;
+
+            }
+        }
+    }
+
+    .trending--courses--selector--content{
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+        border: 1px solid #e5e5e5;
+        padding: 2rem;
+        .trending--courses--selector--content--title{
+            font-size: 1.5rem;
+            font-weight: 600;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .trending--courses--selector--content--subtitle{
+            font-size: 0.95rem;
+            font-weight: 400;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .trending--courses--selector--content--cards{
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-direction: row;
+        }
+    }
+}

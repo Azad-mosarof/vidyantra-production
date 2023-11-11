@@ -1,0 +1,116 @@
+@import '../../css-config/mixins.scss';
+
+.main--header {
+    width: 100%;
+    padding: 0 20px;
+    z-index: 99;
+    color: rgb(3, 3, 3);
+    background-color: rgba(0, 0, 0, 0.0);
+    border-color: rgba(0, 0, 0, 0.1);
+    top: 0;
+    left: 0;
+    position: fixed;
+    overflow: auto;
+    .header--content {
+        display: flex;
+        align-items: center;
+        height: 50px;
+        max-width: 1200px;
+        margin: 0 auto;
+        overflow: auto;
+        @include md {
+            height: 80px;
+        }
+    }
+    .left {
+        list-style-type: none;
+        gap: 25px;
+        right: 5%;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include md {
+            display: flex;
+        }
+        li {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #000;
+            font-family: Arial, Helvetica, sans-serif;
+            cursor: pointer;
+            &:hover {
+                opacity: 0.6;
+            }
+        }
+        .show{
+            display: none;
+            @include md{
+                display: block;
+            }
+        }
+    }
+    .center {
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+        color: #000;
+        @include md {
+            font-size: 1.5rem;
+            position: absolute;
+            left: 5%;
+            transform: translateX(-50%);
+        }
+    }
+    .right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        @include md {
+            gap: 10px;
+        }
+        .sign--up{
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            background-color: black;
+            color: white;
+            font-size: 15px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .log--in{
+            padding-left: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            border: 1px solid black;
+            color: black;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 7px;
+            padding-bottom: 7px;
+        }
+    }
+    &.sticky--header {
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color: #83498c;
+        top: 0;
+        transform: translateY(-60px);
+        animation: StickyHeader 0.3s ease forwards;
+    }
+}
+
+@keyframes StickyHeader {
+    0% {
+        transform: translateY(-60px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
