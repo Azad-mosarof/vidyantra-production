@@ -1,4 +1,4 @@
-export const baseUrl = 'http://localhost:3001/';
+export const baseUrl = 'https://scms-face-recognition.el.r.appspot.com/';
 export const signIn = 'api/signIn';
 export const newAccount = 'api/newAccount';
 export const storeCourse = 'api/storeCourse';
