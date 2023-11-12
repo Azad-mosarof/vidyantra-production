@@ -11,96 +11,6 @@ import { useEffect } from 'react'
 import * as api from '../../utils/Api.jsx'
 import axios from 'axios'
 
-// const sampleCourses = [
-//     {
-//         id: 1,
-//         title: 'Python for Everybody',
-//         subtitle: 'Getting Started with Python',
-//         image: 'https://www.itview.in/blog/wp-content/uploads/2021/01/1611989577990.png',
-//         rating: 4.5,
-//         ratingUsers: 10000,
-//         author: 'Charles Severance',
-//         originalPrice: 3999,
-//         discountPrice: 455,
-//     },
-//     {
-//         id: 2,
-//         title: 'The Complete JavaScript Course 2021: From Zero to Expert!',
-//         subtitle: 'The modern JavaScript course for everyone! Master JavaScript with projects, challenges and theory. Many courses in one!',
-//         image: 'https://www.itview.in/blog/wp-content/uploads/2021/01/1611989577990.png',
-//         rating: 4.7,
-//         ratingUsers: 10000,
-//         author: 'Jonas Schmedtmann',
-//         originalPrice: 455,
-//         discountPrice: 455,
-//     },
-//     {
-//         id: 3,
-//         title: 'Machine Learning A-Z™: Hands-On Python & R In Data Science',
-//         subtitle: 'Learn to create Machine Learning Algorithms in Python and R from two Data Science experts. Code templates included.',
-//         image: 'https://www.itview.in/blog/wp-content/uploads/2021/01/1611989577990.png',
-//         rating: 4.5,
-//         ratingUsers: 10000,
-//         author: 'Kirill Eremenko',
-//         originalPrice: 455,
-//         discountPrice: 455,
-//     },
-//     {
-//         id: 4,
-//         title: 'Machine Learning A-Z™: Hands-On Python & R In Data Science',
-//         subtitle: 'Learn to create Machine Learning Algorithms in Python and R from two Data Science experts. Code templates included.',
-//         image: 'https://www.itview.in/blog/wp-content/uploads/2021/01/1611989577990.png',
-//         rating: 4.5,
-//         ratingUsers: 10000,
-//         author: 'Kirill Eremenko',
-//         originalPrice: 455,
-//         discountPrice: 455,
-//     },
-//     {
-//         id: 5,
-//         title: 'Machine Learning A-Z™: Hands-On Python & R In Data Science',
-//         subtitle: 'Learn to create Machine Learning Algorithms in Python and R from two Data Science experts. Code templates included.',
-//         image: 'https://www.itview.in/blog/wp-content/uploads/2021/01/1611989577990.png',
-//         rating: 4.5,
-//         ratingUsers: 10000,
-//         author: 'Kirill Eremenko',
-//         originalPrice: 455,
-//         discountPrice: 455,
-//     },
-//     {
-//         id: 6,
-//         title: 'Machine Learning A-Z™: Hands-On Python & R In Data Science',
-//         subtitle: 'Learn to create Machine Learning Algorithms in Python and R from two Data Science experts. Code templates included.',
-//         image: 'https://www.itview.in/blog/wp-content/uploads/2021/01/1611989577990.png',
-//         rating: 4.5,
-//         ratingUsers: 10000,
-//         author: 'Kirill Eremenko',
-//         originalPrice: 455,
-//         discountPrice: 455,
-//     },
-//     {
-//         id: 7,
-//         title: 'Machine Learning A-Z™: Hands-On Python & R In Data Science',
-//         subtitle: 'Learn to create Machine Learning Algorithms in Python and R from two Data Science experts. Code templates included.',
-//         image: 'https://www.itview.in/blog/wp-content/uploads/2021/01/1611989577990.png',
-//         rating: 4.5,
-//         ratingUsers: 10000,
-//         author: 'Kirill Eremenko',
-//         originalPrice: 455,
-//         discountPrice: 455,
-//     },
-//     {
-//         id: 8,
-//         title: 'Machine Learning A-Z™: Hands-On Python & R In Data Science',
-//         subtitle: 'Learn to create Machine Learning Algorithms in Python and R from two Data Science experts. Code templates included.',
-//         image: 'https://www.itview.in/blog/wp-content/uploads/2021/01/1611989577990.png',
-//         rating: 4.5,
-//         ratingUsers: 10000,
-//         author: 'Kirill Eremenko',
-//         originalPrice: 455,
-//         discountPrice: 455,
-//     },
-// ]
 
 const topCategories = [
     'Python',
@@ -114,11 +24,15 @@ const topCategories = [
     'Music',
 ]
 
+/**
+ * @returns Trending courses component
+*/
 function TrendingCourses() {
 
     const [startIndex, setStartIndex] = useState(0);
     const [courses, setCourses] = useState([]);
 
+    //make api call to get all trnding courses
     useEffect(() => {
         axios.get(api.baseUrl + api.getCourses)
         .then(response => {

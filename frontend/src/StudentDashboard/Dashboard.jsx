@@ -15,20 +15,26 @@ const enrolledCourses = [];
 function Dashboard() {
 
   const navigate = useNavigate();
-  
   const [courses, setCourses] = React.useState([]);
+
+  /**
+   * Get user info from local storage
+   * If user info is not present, redirect to login page
+   * Else, get user id and name from user info
+   */
   const userInfoString = localStorage.getItem('userInfo');
   const userInfo = userInfoString ? JSON.parse(userInfoString) : null;
-
   const userId = userInfo ? userInfo.id : null;
   const userName = userInfo ? userInfo.firstName + ' ' + userInfo.lastName : null;
   const shortName = userInfo ? userInfo.firstName.charAt(0) + userInfo.lastName.charAt(0) : null;
 
+  // sign out
   const handleSignOut = () => {
     localStorage.removeItem('userInfo')
     navigate('/')
   }
 
+  // get all enrolled courses
   useEffect(() => {
     axios.get(api.baseUrl + api.getAllEnrolledCourses+`/${userId}`)
     .then(response => {

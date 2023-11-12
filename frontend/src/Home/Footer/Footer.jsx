@@ -5,7 +5,10 @@ import './Footer.scss'
 import { FaLocationArrow, FaMobileAlt, FaEnvelope } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 
-
+/**
+ * Footer component
+ * @returns Footer component
+ * */
 function Footer() {
 
   const navigate = useNavigate()

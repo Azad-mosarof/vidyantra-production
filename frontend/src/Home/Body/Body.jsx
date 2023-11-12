@@ -5,6 +5,10 @@ import TrendingCourses from './TrendingCourses'
 
 import hero_logo from '../../assets/hero_logo.jpg'
 
+/**
+ * Body component
+ * @returns Body component
+ */
 function Body() {
   return (
     <div className="body">

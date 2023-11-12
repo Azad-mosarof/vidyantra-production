@@ -8,6 +8,7 @@ function Template({key, course}) {
 
     const navigate = useNavigate()
 
+    //handle course click
     const handleCourseClick = () => {
         navigate(`/course-details/${course.id}`)
     }

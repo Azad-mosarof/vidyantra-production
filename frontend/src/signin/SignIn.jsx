@@ -20,10 +20,12 @@ function SignIn() {
   const [password, setPassword] = useState('')
   const {setUser, setUserInfo} = useAppContext()
 
+  //save data in local storage
   const saveDataInLocalStorage = (student) => {
     localStorage.setItem('userInfo', JSON.stringify(student));
   }
 
+  //sign in the user
   const signIn = async (e) =>{
       e.preventDefault()
       const data = {

@@ -5,6 +5,12 @@ import Typography from '@mui/material/Typography';
 import StarIcon from '@mui/icons-material/Star';
 import {useNavigate} from 'react-router-dom'
 
+
+/**
+ * @returns Course card component
+ * @param {number} key
+ * @param {object} course
+ * */
 function CourseCard({
     key,
     course
@@ -12,6 +18,7 @@ function CourseCard({
 
     const navigate = useNavigate()
 
+    //handle course click
     const handleCourseClick = () => {
         navigate(`/course-details/${course.id}`)
     }

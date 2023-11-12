@@ -13,6 +13,7 @@ function SearchResults() {
     const { query } = useParams()
     const [courses, setCourses] = useState([])
     
+    // make api for the search query
     useEffect(() => {
         fetch(`${api.baseUrl + api.searchCourses}/${query}`)
             .then(res => res.json())

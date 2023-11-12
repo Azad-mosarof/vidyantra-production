@@ -7,6 +7,10 @@ import { useAppContext } from '../utils/Context'
 import axios from 'axios';
 import * as api from '../utils/Api'
 
+/**
+ * Signup component
+ * @returns
+ * */
 function Signup() {
 
     const navigate = useNavigate()
@@ -15,23 +19,26 @@ function Signup() {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [phone, setPhone] = useState('')
-    const {setUser, setUserInfo} = useAppContext()
 
+    //validate password
     const validatePassword = (password) => {
         var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
         return re.test(password) && password.length >= 6;
     }
 
+    //validate email
     const validateEmail = (email) => {
         var re = /\S+@\S+\.\S+/;
         return re.test(email);
     }
 
+    //validate phone
     const validatePhone = (phone) => {
         var re = /^\d{10}$/;
         return re.test(phone);
     }
 
+    //validate all input fields
     const checkInputFields = () => {
         if (firstName === '') {
             alert('Please enter first name')
@@ -52,6 +59,7 @@ function Signup() {
         return true
     }
 
+    //make an api call to create account
     const createAccount = async () => {
         try {
             if(!checkInputFields())
