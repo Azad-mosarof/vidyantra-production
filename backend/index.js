@@ -9,7 +9,11 @@ const app = express();
 app.use(cors());
 app.use(express.json()); 
 
-//get all the courses
+/**
+ * get all courses
+ * @returns {Array} courses
+ * @throws {500} Internal Server Error
+ */
 app.get('/api/getCourses', async (req, res) => {
     try {
       const coursesSnapshot = await db.collection(ct.courseCollection).get();
@@ -26,7 +30,14 @@ app.get('/api/getCourses', async (req, res) => {
     }
 });
 
-//get course by id
+
+/**
+ * get course by id
+ * @param {string} id
+ * @returns {Object} course
+ * @throws {404} Course not found
+ * @throws {500} Internal Server Error
+*/
 app.get('/api/courses/:id', async (req, res) => {
     try {
       const courseSnapshot = await db.collection(ct.courseCollection).doc(req.params.id).get();
@@ -43,7 +54,12 @@ app.get('/api/courses/:id', async (req, res) => {
     }
 });
 
-//store course in firebase
+
+/**
+ * store a course
+ * @param {Object} course
+ * @throws {500} Internal Server Error
+*/
 app.post('/api/storeCourse', async (req, res) => {
     try {
       const course = req.body;
@@ -55,7 +71,12 @@ app.post('/api/storeCourse', async (req, res) => {
     }
 });
 
-//update course in firebase
+
+/**
+ * update course by id
+ * @param {string} id
+ * @throws {500} Internal Server Error
+*/
 app.put('/api/updateCourse/:id', async (req, res) => {
     try {
       const course = req.body;
@@ -67,7 +88,12 @@ app.put('/api/updateCourse/:id', async (req, res) => {
     }
 });
 
-//create new account
+
+/**
+ * create a new account
+ * @param {Object} student
+ * @throws {500} Internal Server Error
+*/
 app.post('/api/newAccount', async (req, res) => {
     try {
       const student = req.body;
@@ -80,7 +106,14 @@ app.post('/api/newAccount', async (req, res) => {
     }
 });
 
-// Sign in account
+
+/**
+ * sign in to an account
+ * @param {Object} student
+ * @returns {Object} student
+ * @throws {404} Student not found
+ * @throws {500} Internal Server Error
+*/
 app.post('/api/signIn', async (req, res) => {
   try {
     const student = req.body;
@@ -107,7 +140,12 @@ app.post('/api/signIn', async (req, res) => {
   }
 });
 
-//buy course
+
+/**
+ * Buy a course
+ * @param {Object} student
+ * @throws {500} Internal Server Error
+ */
 app.post('/api/buyCourse', async (req, res) => {
   try {
     const student = req.body;
@@ -123,7 +161,13 @@ app.post('/api/buyCourse', async (req, res) => {
   }
 });
 
-//get all the enrolled courses
+
+/**
+ * get all enrolled courses
+ * @param {string} userId
+ * @returns {Array} enrolledCourses
+ * @throws {500} Internal Server Error
+*/
 app.get('/api/getAllEnrolledCourses/:userId', async (req, res) => {
   try {
     const coursesSnapshot = await db.collection(ct.studentsCollection).doc(req.params.userId).get();
@@ -140,7 +184,13 @@ app.get('/api/getAllEnrolledCourses/:userId', async (req, res) => {
   }
 });
 
-//search courses by search query
+
+/**
+ * search courses by name, instructor, or location
+ * @param {string} query
+ * @returns {Array} searchResults
+ * @throws {500} Internal Server Error
+*/
 app.get('/api/searchCourses/:query', async (req, res) => {
   try {
     const searchQuery = req.params.query;
@@ -179,6 +229,9 @@ app.get('/api/searchCourses/:query', async (req, res) => {
 });
 
 
+/**
+ * start the server
+*/
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
