@@ -128,7 +128,9 @@ function Header() {
                       textAlign: 'left',
                     }}
                   >
-                    {userInfo ? userInfo.firstName[0].toUpperCase() + userInfo.lastName[0].toUpperCase() : 'U'}
+                    { 
+                      userInfo && userInfo.firstName && userInfo.lastName ?
+                      (userInfo.firstName[0].toUpperCase() + userInfo.lastName[0].toUpperCase()) : 'U'}
                   </Typography>
 
                 </Box>
