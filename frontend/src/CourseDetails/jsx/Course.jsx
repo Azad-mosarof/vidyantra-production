@@ -16,6 +16,11 @@ function Course({course}) {
         const userInfo = userInfoString ? JSON.parse(userInfoString) : null;
         const userId = userInfo ? userInfo.id : null;
 
+        if(!userId){
+            alert('Please login to buy this course')
+            return
+        }
+
         const data = {
             courseId: course.id,
             studentId: userId,

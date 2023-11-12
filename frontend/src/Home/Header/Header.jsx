@@ -130,7 +130,7 @@ function Header() {
                   >
                     { 
                       userInfo && userInfo.firstName && userInfo.lastName ?
-                      (userInfo.firstName[0].toUpperCase() + userInfo.lastName[0].toUpperCase()) : 'U'}
+                      (userInfo.firstName[0].toUpperCase() + userInfo.lastName[0].toUpperCase()) : null}
                   </Typography>
 
                 </Box>

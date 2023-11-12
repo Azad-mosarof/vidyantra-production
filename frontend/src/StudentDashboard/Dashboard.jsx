@@ -21,6 +21,8 @@ function Dashboard() {
   const userInfo = userInfoString ? JSON.parse(userInfoString) : null;
 
   const userId = userInfo ? userInfo.id : null;
+  const userName = userInfo ? userInfo.firstName + ' ' + userInfo.lastName : null;
+  const shortName = userInfo ? userInfo.firstName.charAt(0) + userInfo.lastName.charAt(0) : null;
 
   const handleSignOut = () => {
     localStorage.removeItem('userInfo')
@@ -71,7 +73,7 @@ function Dashboard() {
             fontFamily: 'Poppins',
           }}
         >
-          Azad Mosarof
+          {userName}
         </Typography>
       </Box>
 
@@ -121,7 +123,7 @@ function Dashboard() {
                   alignSelf: 'center',
                 }}
               >
-                AM
+                {shortName}
               </Typography>
             </Box>
 
