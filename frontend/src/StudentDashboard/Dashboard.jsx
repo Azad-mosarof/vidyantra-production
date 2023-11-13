@@ -1,50 +1,51 @@
-import React from 'react'
-import './Dashboard.scss'
-import { Box } from '@mui/system'
+import React from 'react';
+import './Dashboard.scss';
+import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
 import Header from '../Home/Header/Header';
 import CourseCard from '../Home/Components/jsx/CourseCard';
 import Footer from '../Home/Footer/Footer';
 import axios from 'axios';
-import * as api from '../utils/Api'
+import * as api from '../utils/Api';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// Array to store enrolled courses
 const enrolledCourses = [];
 
+/**
+ * Dashboard component to display user information and enrolled courses.
+ * @returns {JSX.Element}
+ */
 function Dashboard() {
-
+  // React hook to navigate between pages
   const navigate = useNavigate();
+  // State to store enrolled courses
   const [courses, setCourses] = React.useState([]);
 
-  /**
-   * Get user info from local storage
-   * If user info is not present, redirect to login page
-   * Else, get user id and name from user info
-   */
+  // Get user info from local storage
   const userInfoString = localStorage.getItem('userInfo');
   const userInfo = userInfoString ? JSON.parse(userInfoString) : null;
   const userId = userInfo ? userInfo.id : null;
   const userName = userInfo ? userInfo.firstName + ' ' + userInfo.lastName : null;
   const shortName = userInfo ? userInfo.firstName.charAt(0) + userInfo.lastName.charAt(0) : null;
 
-  // sign out
+  // Function to handle user sign out
   const handleSignOut = () => {
-    localStorage.removeItem('userInfo')
-    navigate('/')
-  }
+    localStorage.removeItem('userInfo');
+    navigate('/');
+  };
 
-  // get all enrolled courses
+  // Fetch all enrolled courses for the user
   useEffect(() => {
-    axios.get(api.baseUrl + api.getAllEnrolledCourses+`/${userId}`)
-    .then(response => {
-        console.log(response.data);
+    axios.get(api.baseUrl + api.getAllEnrolledCourses + `/${userId}`)
+      .then(response => {
         setCourses(response.data);
-    })
-    .catch(error => {
+      })
+      .catch(error => {
         console.error('Error:', error);
-    });
-  }, []);
+      });
+  }, [userId]);
 
   return (
     <Box
@@ -54,8 +55,10 @@ function Dashboard() {
         gap: '1rem',
       }}
     >
-      <Header/>
+      {/* Header component */}
+      <Header />
 
+      {/* User information section */}
       <Box
         sx={{
           display: 'flex',
@@ -83,6 +86,7 @@ function Dashboard() {
         </Typography>
       </Box>
 
+      {/* User profile section */}
       <Box
         sx={{
           display: 'flex',
@@ -109,6 +113,7 @@ function Dashboard() {
             }}
           >
 
+            {/* User profile image */}
             <Box
               sx={{
                 width: '8rem',
@@ -133,6 +138,7 @@ function Dashboard() {
               </Typography>
             </Box>
 
+            {/* Sign out button */}
             <Typography
               variant="h4"
               sx={{
@@ -148,13 +154,14 @@ function Dashboard() {
               }}
               onClick={handleSignOut}
             >
-              SignOut
+              Sign Out
             </Typography>
 
           </Box>
         </Box>
       </Box>
 
+      {/* Enrolled courses section */}
       <Box
         sx={{
           display: 'flex',
@@ -166,6 +173,7 @@ function Dashboard() {
         }}
       >
 
+        {/* Section title */}
         <Typography
           variant="h2"
           sx={{
@@ -179,6 +187,7 @@ function Dashboard() {
           Courses you're enrolled in
         </Typography>
 
+        {/* Enrolled courses */}
         <Box
           sx={{
             display: 'flex',
@@ -191,24 +200,21 @@ function Dashboard() {
             textAlign: 'left',
           }}
         >
-
-          {
-            courses.map((course, index) => (
-              <CourseCard
-                key={index}
-                course={course}
-              />
-            ))
-          }
-        
+          {courses.map((course, index) => (
+            <CourseCard
+              key={index}
+              course={course}
+            />
+          ))}
         </Box>
 
       </Box>
 
-      <Footer/>
+      {/* Footer component */}
+      <Footer />
 
     </Box>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

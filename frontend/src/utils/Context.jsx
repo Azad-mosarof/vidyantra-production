@@ -1,96 +1,106 @@
-import { useEffect } from "react";
-import { createContext, useState, useContext } from "react";
-import { useLocation } from "react-router-dom";
+// Import necessary modules from React
+import React, { useEffect, createContext, useContext, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
+// Create a context to share data across components
 export const Context = createContext();
 
+// Custom hook to access the context
 export const useAppContext = () => useContext(Context);
 
-export const AppContext = ({ children }) => {
+// Functional component for the AppContext
+const AppContext = ({ children }) => {
+  // State to manage device-related information
+  const [deviceInfo, setDeviceInfo] = useState({
+    isMobile: false,
+    isTablet: false,
+    isDesktop: false,
+    isLaptop: false,
+    isPortrait: false,
+    isLandscape: false,
+    isRetina: false,
+    isTouch: false,
+    isHover: false,
+  });
 
-    const [isMobile, setIsMobile] = useState(false);
-    const [isTablet, setIsTablet] = useState(false);
-    const [isDesktop, setIsDesktop] = useState(false);
-    const [isLaptop, setIsLaptop] = useState(false);
-    const [isPortrait, setIsPortrait] = useState(false);
-    const [isLandscape, setIsLandscape] = useState(false);
-    const [isRetina, setIsRetina] = useState(false);
-    const [isTouch, setIsTouch] = useState(false);
-    const [isHover, setIsHover] = useState(false);
-    const [user, setUser] = useState(null);
-    const [userType, setUserType] = useState(null)
-    const [userInfo, setUserInfo] = useState(null)  
+  // State to manage user-related information
+  const [userState, setUserState] = useState({
+    user: null,
+    userType: null,
+    userInfo: null,
+  });
 
-    const handleUser = (user, userType) => {
-        setUser(user);
-        setUserType(userType);
+  // Function to update user-related information
+  const handleUser = (user, userType) => {
+    setUserState({ ...userState, user, userType });
+  };
+
+  // Effect to handle window resize events and update device information
+  useEffect(() => {
+    const handleResize = () => {
+      setDeviceInfo((prev) => ({
+        ...prev,
+        isMobile: window.innerWidth < 480,
+        isTablet: window.innerWidth >= 480 && window.innerWidth < 768,
+        isDesktop: window.innerWidth >= 768 && window.innerWidth < 1024,
+        isLaptop: window.innerWidth >= 1024 && window.innerWidth < 1200,
+        isPortrait: window.innerHeight > window.innerWidth,
+        isLandscape: window.innerWidth > window.innerHeight,
+        isRetina: window.devicePixelRatio > 1,
+      }));
     };
-    
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 480);
-            setIsTablet(window.innerWidth >= 480 && window.innerWidth < 768);
-            setIsDesktop(window.innerWidth >= 768 && window.innerWidth < 1024);
-            setIsLaptop(window.innerWidth >= 1024 && window.innerWidth < 1200);
-            setIsPortrait(window.innerHeight > window.innerWidth);
-            setIsLandscape(window.innerWidth > window.innerHeight);
-            setIsRetina(window.devicePixelRatio > 1);
-        }
-        window.addEventListener("resize", handleResize);
-        handleResize();
-        return () => window.removeEventListener("resize", handleResize);
-    }
-    , []);
 
-    useEffect(() => {
-        const handleTouch = () => {
-            setIsTouch(true); //setIsTouch will be true if the user is on a touch device
-        }
-        window.addEventListener("touchstart", handleTouch);
-        handleTouch();
-        return () => window.removeEventListener("touchstart", handleTouch);
-    }
-    , []);
+    // Function to handle touch events and update device information
+    const handleTouch = () => {
+      setDeviceInfo((prev) => ({ ...prev, isTouch: true }));
+    };
 
-    useEffect(() => {
-        const handleHover = () => {
-            setIsHover(true); //setIsHover will be true if the user is using a mouse
-        }
-        window.addEventListener("mouseover", handleHover);
-        handleHover();
-        return () => window.removeEventListener("mouseover", handleHover);
-    }
-    , []);
+    // Function to handle hover events and update device information
+    const handleHover = () => {
+      setDeviceInfo((prev) => ({ ...prev, isHover: true }));
+    };
 
+    // Event listeners for window resize, touch, and hover
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('touchstart', handleTouch);
+    window.addEventListener('mouseover', handleHover);
 
-    const location = useLocation();
+    // Initial calls to update device information
+    handleResize();
+    handleTouch();
+    handleHover();
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [location]);
+    // Cleanup by removing event listeners
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('touchstart', handleTouch);
+      window.removeEventListener('mouseover', handleHover);
+    };
+  }, []);
 
-    return (
-        <Context.Provider value={{
-            isMobile,
-            isTablet,
-            isDesktop,
-            isLaptop,
-            isPortrait,
-            isLandscape,
-            isRetina,
-            isTouch,
-            isHover,
-            user,
-            setUser,
-            userType,
-            userInfo,
-            setUserInfo,
-            setUserType,
-            location,
-        }}>
-            {children}
-        </Context.Provider>
-    )
-}
+  // Get the current location using React Router's useLocation hook
+  const location = useLocation();
 
+  // Effect to scroll to the top when the location changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  // Provide the context values to the components
+  return (
+    <Context.Provider
+      value={{
+        ...deviceInfo,
+        ...userState,
+        setUserInfo: (userInfo) => setUserState({ ...userState, userInfo }),
+        location,
+        handleUser,
+      }}
+    >
+      {children}
+    </Context.Provider>
+  );
+};
+
+// Export the AppContext component as the default export
 export default AppContext;
