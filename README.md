@@ -23,4 +23,4 @@ This repository contains the codebase for Vidyantra Production application. To r
 
 Ensure that you have Node.js and npm installed before running these commands. For any further information or troubleshooting, refer to the documentation or reach out to the project maintainers.
 
-Visit the website: [https://best-books-c53c8.web.app/](https://best-books-c53c8.web.app/)
+[![Visit the website](https://example.com/button.png)](https://best-books-c53c8.web.app/)
