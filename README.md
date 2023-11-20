@@ -1,6 +1,6 @@
 # Vidyantra-Production
 
-[![Visit the website]](https://best-books-c53c8.web.app/)
+[[Visit the website]](https://best-books-c53c8.web.app/)
 
 This repository contains the codebase for Vidyantra Production application. To run the application, follow the steps outlined below:
 
