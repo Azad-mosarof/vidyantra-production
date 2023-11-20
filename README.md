@@ -1,5 +1,7 @@
 # Vidyantra-Production
 
+[![Visit the website]](https://best-books-c53c8.web.app/)
+
 This repository contains the codebase for Vidyantra Production application. To run the application, follow the steps outlined below:
 
 ## Backend Setup
@@ -22,5 +24,3 @@ This repository contains the codebase for Vidyantra Production application. To r
    - This will install the necessary frontend packages and initiate the React application.
 
 Ensure that you have Node.js and npm installed before running these commands. For any further information or troubleshooting, refer to the documentation or reach out to the project maintainers.
-
-[![Visit the website](https://w7.pngwing.com/pngs/234/850/png-transparent-web-development-web-design-awwwards-web-design-blue-search-engine-optimization-web-design-thumbnail.png)](https://best-books-c53c8.web.app/)
